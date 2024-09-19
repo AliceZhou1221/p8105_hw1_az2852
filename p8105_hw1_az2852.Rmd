@@ -11,7 +11,7 @@ data("penguins", package = "palmerpenguins")
 library(tidyverse)
 ```
 
-The penguins (344 rows × 8 columns) dataset contains flipper, bill, and body mass data for Adelie, Gentoo, and Chinstrap penguins recorded in 2007-2009 from Torgersen Island, Biscoe Island, and Dream Island. Each row is data for one penguin, including species, bill length, bill width, flipper length, and body mass. The average flipper length for the penguins in the dataset is `mean(pull(penguins, flipper_length_mm), na.rm = TRUE)`
+The penguins (344 rows × 8 columns) dataset contains flipper, bill, and body mass data for Adelie, Gentoo, and Chinstrap penguins recorded in 2007-2009 from Torgersen Island, Biscoe Island, and Dream Island. Each row is data for one penguin, including species, bill length, bill width, flipper length, and body mass. The average flipper length for the penguins in the dataset is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), digits = 2)` mm.
 
 Below is a plot of flipper length agains bill length for the penguins in the dataset (342 penguins and 2 missing values). The plot is divided into three clusters when colored by species. Penguins of the same species tend to have similar bill length and flipper length. For example, Adelies in general have the shortest flippers and bills; Chinstraps have the longest flippers; Gentoos have the longest bills. The clusters are cleanly divided but there is some spread within each cluster, showing considerable individual difference within the penguin population. It also appears that there might be a positive correlation between bill length and flipper length.
 ```{r scatterplot, warning=FALSE}
