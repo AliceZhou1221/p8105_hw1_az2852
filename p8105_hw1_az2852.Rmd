@@ -11,9 +11,9 @@ data("penguins", package = "palmerpenguins")
 library(tidyverse)
 ```
 
-The penguins (344 rows × 8 columns) dataset contains flipper, bill, and body mass data for Adelie, Gentoo, and Chinstrap penguins recorded in 2007-2009 from Torgersen Island, Biscoe Island, and Dream Island. Each row is data for one penguin, including species, bill length, bill width, flipper length, and body mass. The average flipper length for the penguins in the dataset is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), digits = 2)` mm.
+The penguins (344 rows × 8 columns) dataset contains flipper, bill, and body mass data for Adelie, Gentoo, and Chinstrap penguins recorded in 2007-2009 from Torgersen Island, Biscoe Island, and Dream Island. Each row is data for one penguin, including species, island, bill length, flipper length, and body mass. The average flipper length for the penguins in the dataset is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), digits = 2)` mm.
 
-Below is a plot of flipper length agains bill length for the penguins in the dataset (342 penguins and 2 missing values). The plot is divided into three clusters when colored by species. Penguins of the same species tend to have similar bill length and flipper length. For example, Adelies in general have the shortest flippers and bills; Chinstraps have the longest flippers; Gentoos have the longest bills. The clusters are cleanly divided but there is some spread within each cluster, showing considerable individual difference within the penguin population. It also appears that there might be a positive correlation between bill length and flipper length.
+Below is a plot of flipper length agains bill length for the penguins in the dataset (342 penguins and 2 missing values). The plot is divided into three clusters when colored by species. Penguins of the same species tend to have similar bill length and flipper length. For example, Adelies in general have the shortest flippers and bills; Chinstraps have the longest flippers; Gentoos have the longest bills. The clusters are well defined but there is some spread within each cluster, showing considerable individual difference within the penguin population. It also appears that there might be a positive correlation between bill length and flipper length.
 ```{r scatterplot, warning=FALSE}
 ggplot(penguins, aes(
   x = bill_length_mm,
@@ -47,7 +47,7 @@ You can take the mean of numeric variables.
 mean(pull(df, samp))
 ```
 
-You may also take the mean of logical variables (which is just 0.5).
+You may also take the mean of logical variables (TRUE is considered as 1 and FALSE is considered as 0).
 ```{r}
 mean(pull(df, gtzero))
 ```
@@ -59,11 +59,11 @@ You cannot take the mean of factor variables.
 ```{r}
 mean(pull(df, vec_factor))
 ```
-We can try and convert variable types into numeric.
+Now, we apply the `as.numeric` function to logical, character, and factor variables:
 
-* Converting factors into numeric will show their levels.
-* Converting characters into numeric will not give you an answer unless the characters are numbers.
-* Converting logicals into numeric will give you 1s and 0s.
+* Converting logicals into numeric will give you 1s and 0s. This happens because TRUE and FALSE are treated as binary values (1 and 0) in numeric context.
+* Converting characters into numeric will return NAs and a warning. It seems like you cannot convert character strings into numeric values directly unless the character strings represent numbers.
+* Converting factors into numeric will show their underlying levels (3,2,1 corresponding to "Small", "Medium", "Large").
 ```{r, results='hide', warning=FALSE}
 as.numeric(pull(df, vec_factor))
 as.numeric(pull(df, vec_char))
